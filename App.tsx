@@ -1,4 +1,4 @@
-import Groups from './src/screens/Group';
+import Groups from '@screens/Group';
 
 export default function App() {
   return (
