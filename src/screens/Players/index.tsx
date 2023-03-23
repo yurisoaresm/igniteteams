@@ -1,14 +1,7 @@
 import { useState } from 'react';
 import { FlatList } from 'react-native';
 
-import { Input } from '@components/Input';
-import { Filter } from '@components/Filter';
-import { Header } from '@components/Header';
-import { Button } from '@components/Button';
-import { Highlight } from '@components/Highlight';
-import { ListEmpty } from '@components/ListEmpty';
-import { ButtonIcon } from '@components/ButtonIcon';
-import { PlayerCard } from '@components/PlayerCard';
+import { Input, Filter, Header, Button, Highlight, ListEmpty, ButtonIcon, PlayerCard } from '@components/index';
 
 import * as S from './styles';
 
