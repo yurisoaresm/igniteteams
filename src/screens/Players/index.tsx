@@ -10,14 +10,14 @@ import { ListEmpty } from '@components/ListEmpty';
 import { ButtonIcon } from '@components/ButtonIcon';
 import { PlayerCard } from '@components/PlayerCard';
 
-import { Container, Form, HeaderList, NumberOfPlayers } from './styles';
+import * as S from './styles';
 
 export function Players() {
   const [team, setTeam] = useState('Time A');
   const [players, setPlayers] = useState([]);
 
   return (
-    <Container>
+    <S.Container>
       <Header showBackButton />
 
       <Highlight 
@@ -25,7 +25,7 @@ export function Players() {
         subtitle="Adicione a galera e separe os times"
       />
 
-      <Form>
+      <S.Form>
         <Input
           placeholder="Nome da pessoa"
           autoCorrect={false}
@@ -33,9 +33,9 @@ export function Players() {
         <ButtonIcon
           icon="add"
         />
-      </Form>
+      </S.Form>
 
-      <HeaderList>
+      <S.HeaderList>
         <FlatList
           data={['Time A', 'Time B']}
           keyExtractor={item => item}
@@ -49,11 +49,11 @@ export function Players() {
           horizontal
         />
 
-        <NumberOfPlayers>
+        <S.NumberOfPlayers>
           {players.length}
-        </NumberOfPlayers>
+        </S.NumberOfPlayers>
 
-      </HeaderList>
+      </S.HeaderList>
 
       <FlatList 
         data={players}
@@ -80,6 +80,6 @@ export function Players() {
         title="Excluir Turma"
         type="SECONDARY"
       />
-    </Container>
+    </S.Container>
   );
 }

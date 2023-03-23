@@ -3,15 +3,15 @@ import { Header } from '@components/Header';
 import { Highlight } from '@components/Highlight';
 import { Input } from '@components/Input';
 
-import { Container, Content, Icon } from './styles';
+import * as S from './styles';
 
 export function NewGroup() {
   return (
-    <Container>
+    <S.Container>
       <Header showBackButton />
       
-      <Content>
-        <Icon />
+      <S.Content>
+        <S.Icon />
         <Highlight 
           title="Nova Turma"
           subtitle="Crie uma turma para adicionar pessoas"
@@ -24,8 +24,8 @@ export function NewGroup() {
         <Button 
           title="Criar"
         />
-      </Content>
+      </S.Content>
 
-    </Container>
+    </S.Container>
   );
 }
