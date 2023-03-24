@@ -6,7 +6,7 @@ import { Header, Highlight, GroupCard, ListEmpty, Button } from '@components/ind
 
 import * as S from './styles';
 
-export function Group() {
+export function Groups() {
   const [groups, setGroups] = useState<string[]>([]);
 
   return (
