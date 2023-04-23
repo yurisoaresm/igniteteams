@@ -1,8 +1,10 @@
 import { useState } from 'react';
+import { Alert } from 'react-native';
 import { useNavigation } from '@react-navigation/native';
 
-import { Button, Header, Highlight, Input } from '@components/index';
 import { createGroup } from '@storage/groups/createGroup';
+import { AppError } from '@utils/AppError';
+import { Button, Header, Highlight, Input } from '@components/index';
 
 import * as S from './styles';
 
@@ -13,10 +15,18 @@ export function NewGroup() {
   
   async function handlePlayers() {
     try {
+      if (group.trim().length === 0) {
+        throw new AppError("O nome da turma não pode ser vazio.");
+      }
+
       await createGroup(group);
       navigation.navigate('players', { group });
     } catch (error) {
-      console.log(error);
+      if (error instanceof AppError) {
+        Alert.alert("Novo Grupo", error.message);
+      } else {
+        Alert.alert("Novo Grupo", "Não foi possível criar um novo grupo.")
+      }
     }
     
   }
