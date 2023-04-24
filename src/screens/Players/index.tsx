@@ -1,21 +1,68 @@
-import { useState } from 'react';
-import { FlatList } from 'react-native';
+import { useEffect, useState } from 'react';
+import { Alert, FlatList } from 'react-native';
 import { useRoute } from '@react-navigation/native';
 
 import { Input, Filter, Header, Button, Highlight, ListEmpty, ButtonIcon, PlayerCard } from '@components/index';
+import { AppError } from '@utils/AppError';
+
+import { addPlayerByGroup } from '@storage/players/addPlayerByGroup';
+import { getPlayersByGroupAndTeam } from '@storage/players/getPlayersByGroupAndTeam';
 
 import * as S from './styles';
+import { PlayerStorageDTO } from '@storage/players/playerStorageDTO';
 
 type RouteParams = {
   group: string;
 }
 
 export function Players() {
+  const [newPlayerName, setNewPlayerName] = useState('');
   const [team, setTeam] = useState('Time A');
-  const [players, setPlayers] = useState([]);
+  const [players, setPlayers] = useState<PlayerStorageDTO[]>([]);
 
   const route = useRoute();
   const { group } = route.params as RouteParams;
+
+  async function handleAddPlayer() {
+    try {
+      if (newPlayerName.trim().length === 0) {
+        throw new AppError('Por favor, insira um nome válido.');
+      }
+
+      const newPlayer = {
+        name: newPlayerName,
+        team: team === 'Time A' ? 'A' : 'B'
+      }
+
+      await addPlayerByGroup(newPlayer, group);
+
+      fetchPlayersByTeam();
+
+    } catch (error) {
+      if (error instanceof AppError) {
+        Alert.alert("Novo Jogador", error.message);
+      } else {
+        Alert.alert("Novo Jogador", "Não foi possível adicionar o jogador.");
+      }
+    }
+    
+  }
+
+  async function fetchPlayersByTeam() {
+    try {
+      const playersByTeam = await getPlayersByGroupAndTeam(group, team === 'Time A' ? 'A' : 'B');
+
+      setPlayers(playersByTeam);
+    } catch (error) {
+      console.log(error);
+      Alert.alert('Pessoas', 'Não foi possível carregar as pessoas do time selecionado.');
+    }
+  }
+
+  useEffect(() => {
+    console.log("UseEffect")
+    fetchPlayersByTeam();
+  }, [team]);
 
   return (
     <S.Container>
@@ -28,11 +75,13 @@ export function Players() {
 
       <S.Form>
         <Input
+          onChangeText={setNewPlayerName}
           placeholder="Nome da pessoa"
           autoCorrect={false}
         />
         <ButtonIcon
           icon="add"
+          onPress={handleAddPlayer}
         />
       </S.Form>
 
@@ -58,10 +107,10 @@ export function Players() {
 
       <FlatList 
         data={players}
-        keyExtractor={item => item}
+        keyExtractor={item => item.name}
         renderItem={({ item }) => (
           <PlayerCard 
-            name={item}
+            name={item.name}
             onRemove={() => {}}
           />
         )}
