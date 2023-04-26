@@ -2,7 +2,7 @@ import { useEffect, useRef, useState } from 'react';
 import { Alert, FlatList, TextInput } from 'react-native';
 import { useRoute, useNavigation } from '@react-navigation/native';
 
-import { Input, Filter, Header, Button, Highlight, ListEmpty, ButtonIcon, PlayerCard } from '@components/index';
+import { Input, Filter, Header, Button, Highlight, ListEmpty, ButtonIcon, PlayerCard, Loading } from '@components/index';
 import { AppError } from '@utils/AppError';
 
 import { PlayerStorageDTO } from '@storage/players/playerStorageDTO';
@@ -19,6 +19,7 @@ type RouteParams = {
 }
 
 export function Players() {
+  const [isLoading, setIsLoading] = useState(true);
   const [newPlayerName, setNewPlayerName] = useState('');
   const [team, setTeam] = useState('Time A');
   const [players, setPlayers] = useState<PlayerStorageDTO[]>([]);
@@ -62,12 +63,16 @@ export function Players() {
 
   async function fetchPlayersByTeam() {
     try {
+      setIsLoading(true);
+
       const playersByTeam = await getPlayersByGroupAndTeam(group, team === 'Time A' ? 'A' : 'B');
 
       setPlayers(playersByTeam);
     } catch (error) {
       console.log(error);
       Alert.alert('Pessoas', 'Não foi possível carregar as pessoas do time selecionado.');
+    } finally {
+      setIsLoading(false);
     }
   }
 
@@ -88,14 +93,14 @@ export function Players() {
       navigation.navigate('groups');
     } catch (error) {
       console.log(error);
-      Alert.alert('Remover Grupo', 'Não foi possível remover o grupo.');
+      Alert.alert('Remover', 'Não foi possível remover a turma.');
     }
   }
 
   async function handleGroupRemove() {
     Alert.alert(
-      'Remover Grupo', 
-      'Deseja remover este grupo?',
+      'Remover Turma', 
+      'Deseja remover esta turma?',
       [
         { text: 'Não', style: 'cancel' },
         { text: 'Sim', onPress: () => groupRemove() }
@@ -152,6 +157,8 @@ export function Players() {
 
       </S.HeaderList>
 
+      {
+      isLoading ? <Loading /> :
       <FlatList 
         data={players}
         keyExtractor={item => item.name}
@@ -172,9 +179,10 @@ export function Players() {
           />
         )}
       />
+      }
 
       <Button 
-        title="Excluir Turma"
+        title="Excluir turma"
         type="SECONDARY"
         onPress={handleGroupRemove}
       />
