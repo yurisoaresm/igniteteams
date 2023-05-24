@@ -1,10 +1,10 @@
 import styled from 'styled-components/native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { UsersThree } from 'phosphor-react-native';
+import { MaterialIcons } from '@expo/vector-icons'; 
 
 export const Container = styled(SafeAreaView)`
   flex: 1;
-  background-color: ${({ theme }) => theme.COLORS.GRAY_600}; 
+  background-color: ${({ theme }) => theme.COLORS.GRAY_700}; 
   padding: 24px;
 `;
 
@@ -13,9 +13,10 @@ export const Content = styled.View`
   justify-content: center;
 `;
 
-export const Icon = styled(UsersThree).attrs(({ theme }) => ({
+export const Icon = styled(MaterialIcons).attrs(({ theme }) => ({
+  name: 'group',
   size: 56,
-  color: theme.COLORS.GREEN_700
+  color: theme.COLORS.BLUE_700
 }))`
   align-self: center;
 `;

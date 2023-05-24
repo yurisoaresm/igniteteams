@@ -13,7 +13,6 @@ import { removeGroupByName } from '@storage/groups/removeGroupByName';
 
 import * as S from './styles';
 
-
 type RouteParams = {
   group: string;
 }

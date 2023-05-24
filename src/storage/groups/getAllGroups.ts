@@ -2,7 +2,6 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 
 import { GROUP_COLLECTION } from "../storageConfig";
 
-// Get all groups from storage and return them as an array
 export async function getAllGroups() {
   try {
     const storage = await AsyncStorage.getItem(GROUP_COLLECTION);

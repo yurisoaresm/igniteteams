@@ -1,6 +1,6 @@
 import styled, { css } from 'styled-components/native';
 import { TouchableOpacity } from 'react-native';
-import { UsersThree } from 'phosphor-react-native';
+import { MaterialIcons } from '@expo/vector-icons'; 
 
 export const Container = styled(TouchableOpacity)`
   width: 100%;
@@ -24,9 +24,10 @@ export const Title = styled.Text`
   `};
 `;
 
-export const Icon = styled(UsersThree).attrs(({ theme }) => ({
+export const Icon = styled(MaterialIcons).attrs(({ theme }) => ({
+  name: 'group',
   size: 32,
-  color: theme.COLORS.GREEN_700,
+  color: theme.COLORS.BLUE_700,
   weight: 'fill'
 }))`
   margin-right: 20px;

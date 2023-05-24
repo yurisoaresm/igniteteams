@@ -3,14 +3,14 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 
 export const Container = styled(SafeAreaView)`
   flex: 1;
-  background-color: ${({ theme }) => theme.COLORS.GRAY_600}; 
+  background-color: ${({ theme }) => theme.COLORS.GRAY_700}; 
   
   padding: 24px;
 `;
 
 export const Form = styled.View`
   width: 100%;
-  background-color: ${({ theme }) => theme.COLORS.GRAY_700};
+  background-color: ${({ theme }) => theme.COLORS.GRAY_600};
 
   flex-direction: row;
   justify-content: center;

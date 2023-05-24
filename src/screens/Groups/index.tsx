@@ -4,7 +4,6 @@ import { useNavigation, useFocusEffect } from '@react-navigation/native';
 
 import { Header, Highlight, GroupCard, ListEmpty, Button, Loading } from '@components/index';
 
-
 import * as S from './styles';
 import { getAllGroups } from '@storage/groups/getAllGroups';
 
@@ -14,12 +13,10 @@ export function Groups() {
   const [isLoading, setIsLoading] = useState(true);
   const [groups, setGroups] = useState<string[]>([]);
   
-  // Navigate to new group screen
   function handleNewGroup() {
     navigation.navigate('new');
   }
 
-  // Fetch all groups from storage
   async function fetchGroups() {
     try {
       setIsLoading(true);
@@ -35,12 +32,10 @@ export function Groups() {
     }
   }
 
-  // Navigate to players screen of the group
   function handleOpenGroup(group: string) {
     navigation.navigate('players', { group });
   }
 
-  // Execute fetchGroups function when component is focused
   useFocusEffect(useCallback(() => {
     fetchGroups();
   }, []));

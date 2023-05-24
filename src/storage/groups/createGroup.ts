@@ -4,7 +4,6 @@ import { AppError } from '@utils/AppError';
 import { GROUP_COLLECTION } from '../storageConfig';
 import { getAllGroups } from './getAllGroups';
 
-// Add a new group to the list of groups in storage
 export async function createGroup(newGroup: string) {
   try {
     const storedGroups = await getAllGroups();
