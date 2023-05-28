@@ -7,7 +7,7 @@ interface InputProps extends TextInputProps {
   inputRef?: React.RefObject<TextInput>;
 }
 
-export function Input({inputRef, ...rest}: InputProps) {
+export function Input({ inputRef, ...rest }: InputProps) {
   const { COLORS } = useTheme();
 
   return (

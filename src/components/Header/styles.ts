@@ -1,5 +1,5 @@
-import styled from "styled-components/native";
-import { MaterialIcons } from '@expo/vector-icons'; 
+import { MaterialIcons } from '@expo/vector-icons';
+import styled from 'styled-components/native';
 
 export const Container = styled.View`
   width: 100%;
@@ -18,7 +18,7 @@ export const BackButton = styled.TouchableOpacity`
   flex: 1;
 `;
 
-export const  BackIcon = styled(MaterialIcons).attrs(({ theme }) => ({
+export const BackIcon = styled(MaterialIcons).attrs(({ theme }) => ({
   name: 'chevron-left',
   size: 32,
   color: theme.COLORS.WHITE,

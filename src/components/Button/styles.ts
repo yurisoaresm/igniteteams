@@ -5,15 +5,16 @@ export type ButtonTypeStyleProps = 'PRIMARY' | 'SECONDARY';
 
 type Props = {
   type: ButtonTypeStyleProps;
-}
+};
 
-export const Container = styled(TouchableOpacity) <Props>`
+export const Container = styled(TouchableOpacity)<Props>`
   flex: 1;
 
   min-height: 56px;
   max-height: 56px;
 
-  background-color: ${({ theme, type }) => type === 'PRIMARY' ? theme.COLORS.BLUE_700 : theme.COLORS.RED_DARK};
+  background-color: ${({ theme, type }) =>
+    type === 'PRIMARY' ? theme.COLORS.BLUE_700 : theme.COLORS.RED_DARK};
 
   border-radius: 6px;
   margin-top: 20px;

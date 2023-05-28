@@ -5,7 +5,7 @@ export declare global {
       new: undefined;
       players: {
         group: string;
-      }
+      };
     }
   }
 }
