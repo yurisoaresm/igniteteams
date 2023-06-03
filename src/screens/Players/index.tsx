@@ -18,6 +18,7 @@ import { removePlayerByGroup } from '@storage/players/removePlayerByGroup';
 import { AppError } from '@utils/AppError';
 import { useEffect, useRef, useState } from 'react';
 import { Alert, FlatList, TextInput } from 'react-native';
+import { useTheme } from 'styled-components';
 
 import * as S from './styles';
 
@@ -26,6 +27,7 @@ type RouteParams = {
 };
 
 export function Players() {
+  const theme = useTheme();
   const [isLoading, setIsLoading] = useState(true);
   const [newPlayerName, setNewPlayerName] = useState('');
   const [team, setTeam] = useState('Time A');
@@ -50,12 +52,9 @@ export function Players() {
 
       await addPlayerByGroup(newPlayer, group);
 
-      // Remove focus from input
       newPlayerNameInputRef.current?.blur();
 
-      // Clear input
       setNewPlayerName('');
-      // Update list
       fetchPlayersByTeam();
     } catch (error) {
       if (error instanceof AppError) {
@@ -146,6 +145,7 @@ export function Players() {
               title={item}
               isActive={item === team}
               onPress={() => setTeam(item)}
+              style={{ borderColor: theme.COLORS.BLUE_500 }}
             />
           )}
           horizontal
